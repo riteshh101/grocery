@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-5 mb-5">
+
+    <center><div class="col-lg-4">
+                        <div class="checkout-inner">
+                            <div class="checkout-summary">
+                                <h1>Cart Total</h1>
+                                {% for x in cart %}
+                                <p>{{x.product.title}}<span>Rs. {{x.total_price}}</span></p>
+                                {% endfor %}
+                                <p class="sub-total">Sub Total<span>Rs. {{sub_total}}</span></p>
+                                <p class="ship-cost">Shipping Cost<span>Rs. 1</span></p>
+                                <h2>Grand Total<span>Rs. {{grand_total}}</span></h2>
+                            </div>
+
+                           <form action="{% url 'payment_success' %}" method="POST">
+                               {% csrf_token %}
+                               <input type="hidden" name="adrs" value="{{adrs}}">
+<script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_XfqDl5oZQ0Rq4L"
+    data-amount="{{order.amount}}"
+    data-currency="INR"
+    data-order_id="{{order.id}}"
+    data-buttontext="Pay with Razorpay"
+    data-name="Acme Corp"
+    data-description="A Wild Sheep Chase is the third novel by Japanese author Haruki Murakami"
+    data-image="https://example.com/your_logo.jpg"
+    data-prefill.name="Gaurav Kumar"
+    data-prefill.email="gaurav.kumar@example.com"
+    data-theme.color="#F37254"
+></script>
+<input type="hidden" custom="Hidden Element" name="hidden">
+</form>
+
+                    </div>
+
+                </div>
+    </center></div>
+{% endblock %}

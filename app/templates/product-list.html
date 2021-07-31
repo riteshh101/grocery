@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block css %}
+<style>
+    .responsive {
+   max-width: 100%;
+  height: auto;
+}
+</style>
+{% endblock %}
+{% block body %}
+        <!-- Bottom Bar End -->  
+        
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Product List</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Product List Start -->
+        <div class="product-view">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="row">
+
+                            {% for x in prod %}
+                            <div class="col-md-4">
+                                <div class="product-item">
+                                    <div class="product-title">
+                                        <a href="#">{{x.title}}</a>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-image">
+                                        <a href="product-detail.html">
+                                            <img src="/media/{{x.pic1}}" alt="Product Image" class="responsive" height="330">
+                                        </a>
+                                        <div class="product-action">
+                                            <a href="{% url 'cart_add' x.id %}"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="{% url 'whishlist_add' x.id %}"><i class="fa fa-heart"></i></a>
+                                            <a href="{% url 'product_view' x.id %}"><i class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-price">
+                                        <h3><span>Rs.</span>{{x.price}}</h3>
+                                        <a class="btn" href="{% url 'cart_add' x.id %}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- Pagination Start -->
+
+                        <!-- Pagination Start -->
+                    </div>           
+                    
+                    <!-- Side Bar Start -->
+                    <div class="col-lg-4 sidebar">
+<!--                        <div class="sidebar-widget category">-->
+<!--                            <h2 class="title">Category</h2>-->
+<!--                            <nav class="navbar bg-light">-->
+<!--                                <ul class="navbar-nav">-->
+<!--                                    {% for x in cat %}-->
+<!--                                    <li class="nav-item">-->
+<!--                                        <a class="nav-link" href="#"><i class="fa fa-circle"></i>{{x.name}}</a>-->
+<!--                                    </li>-->
+<!--                                    {% endfor %}-->
+
+<!--                                </ul>-->
+<!--                            </nav>-->
+<!--                        </div>-->
+                        
+                        <div class="sidebar-widget widget-slider">
+                            <div class="sidebar-slider normal-slider">
+                                {% for x in prod %}
+                                <div class="product-item">
+                                    <div class="product-title">
+                                        <a href="#">{{x.title}}</a>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="product-image">
+                                        <a href="product-detail.html">
+                                            <img src="/media/{{x.pic1}}" alt="Product Image" class="responsive" height="330">
+                                        </a>
+                                        <div class="product-action">
+                                            <a href="{% url 'cart_add' x.id %}"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="{% url 'whishlist_add' x.id %}"><i class="fa fa-heart"></i></a>
+                                            <a href="{% url 'product_view' x.id %}"><i class="fa fa-search"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-price">
+                                        <h3><span>Rs.</span>{{x.price}}</h3>
+                                        <a class="btn" href="{% url 'cart_add' x.id %}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget brands">
+                            <h2 class="title">Our Category</h2>
+                            <ul>
+                                {% for x in cat %}
+                                <li><a href="{% url 'product_all' x.name %}">{{x.name}} </a></li>
+                                {% endfor %}
+
+                            </ul>
+                        </div>
+                        
+
+                    </div>
+                    <!-- Side Bar End -->
+                </div>
+            </div>
+        </div>
+
+        
+       {% endblock  %}

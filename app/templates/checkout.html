@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block title %}  {% endblock %}
+
+{% block css %}  {% endblock %}
+
+{% block body %}
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Checkout</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Checkout Start -->
+        <div class="checkout">
+            <div class="container-fluid">
+                 <form action="" method="post">
+                <div class="row">
+
+
+                   {% csrf_token %}
+                    <div class="col-lg-8">
+                        <div class="checkout-inner">
+                            <div class="billing-address">
+                                <h2>Shipping Address</h2>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>First Name</label>
+                                        <input class="form-control" type="text" placeholder="First Name" name="fname" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Last Name</label>
+                                        <input class="form-control" type="text" placeholder="Last Name" name="lname" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>E-mail</label>
+                                        <input class="form-control" type="email" placeholder="E-mail" name="email" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Mobile No</label>
+                                        <input class="form-control" type="number" placeholder="Mobile No" name='mobile' required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Address</label>
+                                        <input class="form-control" type="text" placeholder="Address" name="address" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Country</label>
+                                        <select class="custom-select" name="country">
+                                            <option selected value="India">India</option>
+                                            <option value="Afghanistan">Afghanistan</option>
+                                            <option value="Albanian">Albania</option>
+                                            <option value="Algeria">Algeria</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>City</label>
+                                        <input class="form-control" type="text" placeholder="City" name="city" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>State</label>
+                                        <input class="form-control" type="text" placeholder="State" name="state" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>ZIP Code</label>
+                                        <input class="form-control" type="number" placeholder="ZIP Code" name="zipcode" required>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="checkout-inner">
+                            <div class="checkout-summary">
+                                <h1>Cart Total</h1>
+                                {% for x in cart %}
+                                <p>{{x.product.title}}<span>Rs. {{x.total_price}}</span></p>
+                                {% endfor %}
+                                <p class="sub-total">Sub Total<span>Rs. {{sub_total}}</span></p>
+                                <p class="ship-cost">Shipping Cost<span>Rs. 1</span></p>
+                                <h2>Grand Total<span>Rs. {{grand_total}}</span></h2>
+                            </div>
+
+                            <div class="checkout-payment">
+                                <div class="payment-methods">
+                                    <h1>Payment Methods</h1>
+                                    <div class="payment-method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="payment-1" name="payment" required>
+                                            <label class="custom-control-label" for="payment-1">RazorPay</label>
+                                        </div>
+                                        <div class="payment-content" id="payment-1-show">
+                                            <p>
+                                                You Selected RazorPay Payment Method thank you
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                <div class="checkout-btn">
+                                    <button type="submit">Place Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+                     </form>
+            </div>
+        </div>
+        <!-- Checkout End -->
+        
+     {% endblock %}

@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {% endblock %}
+
+{% block css %}
+<style>
+    .responsive {
+   max-width: 100%;
+  height: auto;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+        
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Product Detail</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Product Detail Start -->
+        <div class="product-detail">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="product-detail-top">
+                            <div class="row align-items-center">
+                                <div class="col-md-5">
+                                    <div class="product-slider-single">
+                                        <img src="/media/{{prod.pic1}}" alt="Product Image">
+
+                                    </div>
+<!--                                    <div class="product-slider-single-nav normal-slider">-->
+<!--                                        <div class="slider-nav-img"><img src="{% static 'img/product-1.jpg' %}" alt="Product Image"></div>-->
+<!--                                        <div class="slider-nav-img"><img src="{% static 'img/product-3.jpg' %}" alt="Product Image"></div>-->
+<!--                                        <div class="slider-nav-img"><img src="{% static 'img/product-5.jpg' %}" alt="Product Image"></div>-->
+<!--                                        <div class="slider-nav-img"><img src="{% static 'img/product-7.jpg' %}" alt="Product Image"></div>-->
+<!--                                        <div class="slider-nav-img"><img src="{% static 'img/product-9.jpg' %}" alt="Product Image"></div>-->
+<!--                                        <div class="slider-nav-img"><img src="{% static 'img/product-10.jpg' %}" alt="Product Image"></div>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="product-content">
+                                        <div class="title"><h2>{{prod.title}}</h2></div>
+                                        <div class="ratting">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="price">
+                                            <h4>Price:</h4>
+                                            <p>Rs. {{prod.price}} </p>
+                                        </div>
+                                        <div class="price">
+                                            <h4>Unit:</h4>
+                                            <p style="font-size:15pt; color:gray;">{{prod.quantity}} </p>
+                                        </div>
+
+                                        <div class="action">
+                                            <a class="btn" href="{% url 'cart_add' prod.id %}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row product-detail-bottom">
+                            <div class="col-lg-12">
+                                <ul class="nav nav-pills nav-justified">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="pill" href="#description">Description</a>
+                                    </li>
+
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div id="description" class="container tab-pane active">
+                                        <h4>Product description</h4>
+                                        <p>
+                                            {{prod.description}}
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product">
+                            <div class="section-header">
+                                <h1>Related Products</h1>
+                            </div>
+
+                            <div class="row align-items-center product-slider product-slider-3">
+                                {% for x in related_prod %}
+                                <div class="col-lg-3">
+                                    <div class="product-item">
+                                        <div class="product-title">
+                                            <a href="#">{{x.title}}</a>
+                                            <div class="ratting">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="product-image">
+                                            <a href="product-detail.html">
+                                                <img src="/media/{{x.pic1}}" alt="Product Image" class="responsive" height="330">
+                                            </a>
+                                            <div class="product-action">
+                                                <a href="{% url 'cart_add' x.id %}"><i class="fa fa-cart-plus"></i></a>
+                                                <a href="{% url 'whishlist_add' x.id %}"><i class="fa fa-heart"></i></a>
+                                                <a href="{% url 'product_view' x.id %}"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="product-price">
+                                            <h3><span>$</span>99</h3>
+                                            <a class="btn" href="{% url 'cart_add' x.id %}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Side Bar Start -->
+                    <div class="col-lg-4 sidebar">
+                        <div class="sidebar-widget category">
+                            <h2 class="title">Category</h2>
+                            <nav class="navbar bg-light">
+                                <ul class="navbar-nav">
+                                    {% for x in cat %}
+                                <li><a href="{% url 'product_all' x.name %}">{{x.name}} </a></li>
+                                {% endfor %}
+
+                                </ul>
+                            </nav>
+                        </div>
+                        
+
+                        
+
+                    <!-- Side Bar End -->
+                </div>
+            </div>
+        </div>
+        <!-- Product Detail End -->
+        
+       {% endblock %}

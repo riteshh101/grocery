@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container-fluid">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item active">Wishlist</li>
+                </ul>
+                <p style="text-align:center;color:orange;font-size:20pt;">{% for message in messages %}
+                    {{message}}
+                {% endfor %}
+                </p>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+        
+        <!-- Wishlist Start -->
+        <div class="wishlist-page">
+            <div class="container-fluid">
+                <div class="wishlist-page-inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Price</th>
+                                            <th>Add to Cart</th>
+                                            <th>Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="align-middle">
+                                    {% for x in whishlist %}
+                                        <tr>
+                                            <td>
+                                                <div class="img">
+                                                    <a href="#"><img src="/media/{{x.product.pic1}}" alt="Image"></a>
+                                                    <p>{{x.product.title}}</p>
+                                                </div>
+                                            </td>
+                                            <td>Rs. {{x.product.price}}</td>
+
+                                            <td><a href="{% url 'cart_add' x.product.id %}"><button class="btn-cart">Add to Cart</button></a></td>
+                                            <td><a href="{% url 'whish_remove' x.id %}"> <i class="fa fa-trash"></i></a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wishlist End -->
+     {% endblock %}
